@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Quarterly Earnings — RevealJS</title>
+
+  <!-- Reveal core styles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/theme/white.css" id="theme">
+
+  <!-- Optional: highlight.js styles (used by RevealHighlight) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.8.0/styles/github.css">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* Small custom styling */
+    .contact { font-size: 0.9rem; opacity: 0.9; }
+    .chart { height: 360px; margin: 20px auto; max-width: 900px; }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- Title slide -->
+      <section>
+        <h1>Quarterly Earnings — Q2</h1>
+        <p class="contact">Prepared by: Technical Consultant<br>Contact: <!--email_off-->22f3002573@ds.study.iitm.ac.in<!--/email_off--></p>
+        <aside class="notes">
+          Start with a quick agenda: financial highlights, drivers, guidance, and Q&A.
+        </aside>
+      </section>
+
+      <!-- Markdown slide (uses RevealMarkdown plugin) -->
+      <section data-markdown>
+        <textarea data-template>
+## Executive Summary (Markdown slide)
+
+- Revenue grew **12% QoQ**
+- Operating margin improved from *8%* to *11%*
+- Major drivers:
+  1. Product A adoption
+  2. Cost optimisation
+  3. FX tailwinds
+
+---
+
+### Quick takeaways
+
+1. Focus investment in Product A expansion  
+2. Maintain guidance for FY with conservative assumptions
+        </textarea>
+      </section>
+
+      <!-- Fragments animated list -->
+      <section>
+        <h2>Key Performance Indicators</h2>
+        <ul>
+          <li class="fragment">Revenue: ₹1,250M (↑12% QoQ)</li>
+          <li class="fragment">EBITDA: ₹137M (↑25% QoQ)</li>
+          <li class="fragment fade-up">EPS: ₹3.45</li>
+        </ul>
+        <aside class="notes">
+          Emphasize revenue mix and margin expansion drivers as each fragment reveals.
+        </aside>
+      </section>
+
+      <!-- Code sample with syntax highlighting -->
+      <section>
+        <h2>Data Preparation Script (example)</h2>
+        <pre><code class="language-python" data-trim data-line-numbers>
+import pandas as pd
+
+# Load Q2 data
+df = pd.read_csv("q2_revenue.csv")
+
+# Clean and compute growth
+df['revenue_prev_q'] = df['revenue'].shift(1)
+df['qoq_growth_pct'] = (df['revenue'] - df['revenue_prev_q']) / df['revenue_prev_q'] * 100
+print(df[['segment','revenue','qoq_growth_pct']].head())
+        </code></pre>
+        <aside class="notes">
+          Explain how we validated data sources and reconciled ledger vs. analytics numbers.
+        </aside>
+      </section>
+
+      <!-- Math / financial formula -->
+      <section>
+        <h2>Valuation Snapshot</h2>
+        <p>Using a basic discounted cash flow (DCF) intuition:</p>
+        <p class="fragment">\[ \text{PV} = \sum_{t=1}^{N} \frac{FCF_t}{(1 + r)^t} \]</p>
+        <p class="fragment fade-up">Where \(r\) = discount rate, \(FCF_t\) = free cash flow at time \(t\).</p>
+        <aside class="notes">
+          Use this slide to explain sensitivity to WACC and terminal multiple—show visuals next.
+        </aside>
+      </section>
+
+      <!-- Live demo iframe placeholder (lazy loaded) -->
+      <section>
+        <h2>Live Dashboard (embedded)</h2>
+        <iframe data-src="https://example.com/finance-dashboard" data-preload style="width:100%;height:600px;border:1px solid #ddd;"></iframe>
+        <aside class="notes">
+          If the live demo is unavailable, show a static screenshot or summarize dashboard insights.
+        </aside>
+      </section>
+
+      <!-- Closing slide -->
+      <section>
+        <h2>Questions & Next Steps</h2>
+        <p>Contact: 23f1001999@ds.study.iitm.ac.in</p>
+        <ul>
+          <li class="fragment">Finalize guidance by end of month</li>
+          <li class="fragment">Start scenario planning for FY+1</li>
+        </ul>
+        <aside class="notes">
+          Open floor for stakeholder questions; record follow-ups and owners.
+        </aside>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal and plugins -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/plugin/markdown/markdown.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/plugin/highlight/highlight.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/plugin/math/math.js"></script>
+
+  <!-- MathJax config (used by RevealMath plugin) -->
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+
+  <script>
+    Reveal.initialize({
+      width: 1280,
+      height: 720,
+      margin: 0.04,
+      controls: true,
+      progress: true,
+      history: true,
+      center: true,
+      transition: 'slide',
+      plugins: [ RevealMarkdown, RevealHighlight, RevealMath ]
+    });
+
+    // Lazy-load iframes that use data-src
+    Reveal.addEventListener('slidechanged', function(event) {
+      const iframes = event.currentSlide.querySelectorAll('iframe[data-src]');
+      iframes.forEach(iframe => {
+        if (!iframe.src) iframe.src = iframe.getAttribute('data-src');
+      });
+    });
+  </script>
+</body>
+</html>
